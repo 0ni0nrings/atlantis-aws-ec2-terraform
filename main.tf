@@ -63,6 +63,13 @@ resource "aws_instance" "self" {
 
   depends_on = [aws_key_pair.self]
   
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file("${path.module}/ec2_atlantis.pem")
+  }
+  
   provisioner "file" {
     source      = "runatlantis.sh"
     destination = "/tmp/runatlantis.sh"
@@ -71,7 +78,7 @@ resource "aws_instance" "self" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/runatlantis.sh",
-      "/tmp/runatlantis.sh args",
+      "/tmp/runatlantis.sh args &",
     ]
   }
 }
@@ -120,7 +127,7 @@ resource "aws_security_group_rule" "allow_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["121.74.207.44/32"]
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.self[0].id
 }
 

@@ -13,7 +13,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "Keypair name of the EC2. Mutually exclusive with the public_key variable"
   type        = string
-  default     = "ec2_atlantis_rsa" #manually created
+  default     = "ec2_atlantis" #manually created
 }
 
 variable "public_key" {

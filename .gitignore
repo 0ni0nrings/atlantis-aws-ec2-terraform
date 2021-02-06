@@ -66,3 +66,7 @@ ansible
 
 # Script to download, install & configure Atlantis
 runatlantis.sh
+
+# SSH key pair files
+*.pem
+*.ppk
