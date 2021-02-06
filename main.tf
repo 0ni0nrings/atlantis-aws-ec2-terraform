@@ -67,6 +67,7 @@ resource "aws_instance" "self" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
+    timeout     = "1m"
     private_key = file("${path.module}/ec2_atlantis.pem")
   }
   
@@ -78,7 +79,8 @@ resource "aws_instance" "self" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/runatlantis.sh",
-      "/tmp/runatlantis.sh args &",
+      "nohup /tmp/runatlantis.sh args &",
+      "sleep 20",
     ]
   }
 }
