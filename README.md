@@ -8,14 +8,7 @@ This module support terraform 0.12 only.
 
 Here is basic usage of this module with minimum input.
 
-```hcl
-module "atlantis" {
-    source = "ringanta/ec2-atlantis/aws"
-    version = "1.0.0"
-
-    public_key = "ssh-rsa blablabla"
-}
-```
+The `external ip address` of the EC2 instance will be used to configure GitHub webhooks, for example under Webhooks/Manage http://EC2-IP-ADDRESS:4141/events
 
 The `public_key` module argument must be filled with an SSH public key.
 We can generate SSH private and public key pair using the following `ssh-keygen` command.
@@ -65,7 +58,7 @@ Above command writes private and public key file to **~/.ssh/ec2_atlantis_rsa** 
 
 ## Authors
 
-This module is managed by [Roy Ginting](https://github.com/ringanta/).
+This module is managed by [0ni0nrings](https://github.com/0ni0nrings/).
 
 ## License
 
